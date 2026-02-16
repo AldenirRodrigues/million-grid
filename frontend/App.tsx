@@ -231,7 +231,7 @@ const App: React.FC = () => {
 
   const handleShare = useCallback(async () => {
     const url = window.location.href;
-    if (navigator.share) { try { await navigator.share({ title: 'Million Grid', text: 'Veja o grid!', url }); } catch (e) { } }
+    if (navigator.share) { try { await navigator.share({ title: 'Meus Pixels', text: 'Veja o grid!', url }); } catch (e) { } }
     else { await navigator.clipboard.writeText(url); showToast('Link copiado!'); }
   }, []);
 

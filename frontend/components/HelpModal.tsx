@@ -28,7 +28,7 @@ export const HelpModal: React.FC<HelpModalProps> = ({ onClose }) => {
     {
       icon: <CheckCircle2 className="text-green-600" size={24} />,
       title: "4. Publique",
-      description: "Confira o resumo do seu pedido e clique em 'Publicar' para eternizar seu espaço no Million Grid.",
+      description: "Confira o resumo do seu pedido e clique em 'Publicar' para eternizar seu espaço no Tabuleiro.",
       bg: "bg-green-50"
     }
   ];

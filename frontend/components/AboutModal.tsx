@@ -21,7 +21,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
           >
             <X size={20} />
           </button>
-          <h2 className="text-3xl font-black text-white tracking-tight relative z-10">Million Grid</h2>
+          <h2 className="text-3xl font-black text-white tracking-tight relative z-10">Meus Pixels</h2>
           <p className="text-blue-100 mt-2 text-sm font-medium relative z-10">Um experimento de arte colaborativa global.</p>
         </div>
 
@@ -29,7 +29,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
         <div className="p-6 overflow-y-auto custom-scrollbar bg-white">
           <div className="prose prose-sm text-gray-600 leading-relaxed mb-6">
             <p className="text-base">
-              Bem-vindo ao <strong>Million Grid</strong>. Este é um tabuleiro infinito de 1000x1000 pixels onde cada espaço é um pedaço imutável da história da internet.
+              Bem-vindo ao <strong>Meus Pixels</strong>. Este é um tabuleiro infinito de 1000x1000 pixels onde cada espaço é um pedaço imutável da história da internet.
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
 
         {/* Footer */}
         <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-center text-xs text-gray-400 font-medium uppercase tracking-wider">
-           © 2024 Million Grid Project
+           © 2024 Meus Pixels Project
         </div>
       </div>
     </div>

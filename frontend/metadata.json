@@ -1,5 +1,5 @@
 {
-  "name": "Million Grid",
+  "name": "Meus Pixels",
   "description": "A high-performance 1000x1000 grid allowing users to select areas and upload images with dynamic size limits based on selection area.",
   "requestFramePermissions": []
 }

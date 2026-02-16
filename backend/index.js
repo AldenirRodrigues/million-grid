@@ -19,7 +19,7 @@ app.use(express.json());
 // GET /api/pixels - Fetch all pixels
 app.get('/api/pixels', async (req, res) => {
     try {
-        const result = await db.query("SELECT * FROM million_grid.pixels WHERE status = 'approved' ORDER BY created_at ASC");
+        const result = await db.query("SELECT * FROM pixels WHERE status = 'approved' ORDER BY created_at ASC");
         // Map snake_case from DB to camelCase for frontend
         const pixels = result.rows.map(row => ({
             id: row.id,
@@ -57,7 +57,7 @@ app.get('/api/pixels', async (req, res) => {
 app.post('/api/pixels', async (req, res) => {
     const item = req.body;
     const query = `
-    INSERT INTO million_grid.pixels (
+    INSERT INTO pixels (
       id, type, x, y, w, h, src, content, font_size, font_family, font_weight, 
       color, bg_color, rotation, brightness, contrast, zoom, offset_x, offset_y, 
       title, link, message, status
@@ -123,7 +123,7 @@ app.post('/api/payments/pix', async (req, res) => {
         // Store payment_id if pixel_id is provided
         if (req.body.pixel_id) {
             await db.query(
-                'UPDATE million_grid.pixels SET payment_id = $1 WHERE id = $2',
+                'UPDATE pixels SET payment_id = $1 WHERE id = $2',
                 [response.id.toString(), req.body.pixel_id]
             );
         }
@@ -155,14 +155,14 @@ app.post('/api/payments/webhook', async (req, res) => {
                 const pixelId = paymentInfo.external_reference;
                 if (pixelId) {
                     await db.query(
-                        "UPDATE million_grid.pixels SET status = 'approved' WHERE id = $1",
+                        "UPDATE pixels SET status = 'approved' WHERE id = $1",
                         [pixelId]
                     );
                     console.log(`Pixel ${pixelId} approved!`);
                 } else {
                     // Fallback to update by payment_id
                     await db.query(
-                        "UPDATE million_grid.pixels SET status = 'approved' WHERE payment_id = $1",
+                        "UPDATE pixels SET status = 'approved' WHERE payment_id = $1",
                         [data.id.toString()]
                     );
                     console.log(`Pixel updated by payment_id ${data.id}`);
@@ -179,7 +179,7 @@ app.post('/api/payments/webhook', async (req, res) => {
 // GET /api/pixels/:id/status - Check pixel status
 app.get('/api/pixels/:id/status', async (req, res) => {
     try {
-        const result = await db.query('SELECT payment_id, status FROM million_grid.pixels WHERE id = $1', [req.params.id]);
+        const result = await db.query('SELECT payment_id, status FROM pixels WHERE id = $1', [req.params.id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Pixel not found' });
         }
@@ -199,7 +199,7 @@ app.get('/api/pixels/:id/status', async (req, res) => {
 
         if (paymentInfo.status === 'approved') {
             // Update DB
-            await db.query("UPDATE million_grid.pixels SET status = 'approved' WHERE id = $1", [req.params.id]);
+            await db.query("UPDATE pixels SET status = 'approved' WHERE id = $1", [req.params.id]);
             return res.json({ status: 'approved' });
         }
 
@@ -216,7 +216,7 @@ app.delete('/api/pixels/:id', async (req, res) => {
     try {
         // Only allow deleting pending pixels
         const result = await db.query(
-            "DELETE FROM million_grid.pixels WHERE id = $1 AND status = 'pending' RETURNING *",
+            "DELETE FROM pixels WHERE id = $1 AND status = 'pending' RETURNING *",
             [req.params.id]
         );
 
