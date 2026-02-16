@@ -1,6 +1,6 @@
- 
+CREATE SCHEMA IF NOT EXISTS million_grid;
 
-CREATE TABLE IF NOT EXISTS pixels (
+CREATE TABLE IF NOT EXISTS million_grid.pixels (
     id UUID PRIMARY KEY,
     type VARCHAR(20) NOT NULL,
     x INTEGER NOT NULL,
